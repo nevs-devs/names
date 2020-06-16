@@ -16,7 +16,12 @@ _global_script_class_icons={
 [application]
 
 config/name="Names"
+run/main_scene="res://Main.tscn"
 config/icon="res://icon.png"
+
+[network]
+
+limits/debugger_stdout/max_chars_per_second=65536
 
 [rendering]
 
