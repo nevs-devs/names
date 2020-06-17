@@ -18,9 +18,9 @@ func _physics_process(delta: float) -> void:
 	var dist = _nodeA.translation.distance_to(_nodeB.translation)
 	
 	var diff: float = dist - desired_distance
-	
-	var dir = _nodeA.translation.direction_to(_nodeB.translation)
-	_nodeA.translate(dir * (diff / 2) * delta)
-	_nodeB.translate(-dir * (diff / 2) * delta)
+	if abs(diff) > 0.1:
+		var dir = _nodeA.translation.direction_to(_nodeB.translation)
+		_nodeA.translate(dir * (diff / 2) * delta)
+		_nodeB.translate(-dir * (diff / 2) * delta)
 	
 	scale = Vector3(1, 1, dist)
