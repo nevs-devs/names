@@ -1,6 +1,6 @@
 extends Spatial
 
-const NUM_NODES = 50
+const NUM_NODES = 10000
 const GraphNodeScene = preload("res://GraphNode.tscn")
 const EdgeScene = preload("res://Edge.tscn")
 const INIT_DISTANCE = 10.0
