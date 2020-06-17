@@ -17,3 +17,36 @@ script = ExtResource( 2 )
 [node name="Sphere" type="MeshInstance" parent="."]
 mesh = SubResource( 1 )
 material/0 = null
+
+[node name="DistSlider" type="HSlider" parent="."]
+margin_left = 802.341
+margin_top = 524.659
+margin_right = 1017.34
+margin_bottom = 589.659
+min_value = 10.0
+value = 10.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DistVal" type="Label" parent="."]
+margin_left = 804.0
+margin_top = 520.0
+margin_right = 1014.0
+margin_bottom = 534.0
+text = "0"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Dist" type="Label" parent="."]
+margin_left = 740.815
+margin_top = 549.555
+margin_right = 796.815
+margin_bottom = 563.555
+text = "Distance"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="value_changed" from="DistSlider" to="." method="_on_DistSlider_value_changed"]
