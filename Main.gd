@@ -6,6 +6,7 @@ const EdgeScene = preload("res://Edge.tscn")
 const INIT_DISTANCE = 10.0
 var selected_node = null
 var desired_distance: float = 20.0
+var screen_size: Vector2
 
 class NameNode:
 	var id
@@ -77,7 +78,6 @@ func read_xml():
 func _ready():
 	read_xml()
 	var nodes: Array = []
-
 	var index = 0
 	for name_node in name_nodes:
 		if index >= NUM_NODES:
@@ -102,7 +102,7 @@ func _ready():
 		edge.initialize(source_node, target_node, edge_node.value)
 		add_child(edge)
 		
-		$DistSlider.value = desired_distance
+		$UI/DistSlider.value = desired_distance
 
 
 func _on_node_selected(node):
@@ -118,8 +118,13 @@ func _process(_delta):
 		var distance = selected_node.translation.distance_to($Camera.translation)
 		var target_point = $Camera.project_ray_origin(mouse_position) + $Camera.project_ray_normal(mouse_position) * distance
 		selected_node.translation = target_point
+	
+	if get_viewport().get_visible_rect().size != screen_size:
+		screen_size = get_viewport().get_visible_rect().size
+		$UI.position.x = screen_size.x - 250
+		$UI.position.y = screen_size.y - 100
 
 
 func _on_DistSlider_value_changed(value):
 	desired_distance = value
-	$DistVal.text = str(value)
+	$UI/DistVal.text = str(value)

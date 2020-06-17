@@ -18,35 +18,55 @@ script = ExtResource( 2 )
 mesh = SubResource( 1 )
 material/0 = null
 
-[node name="DistSlider" type="HSlider" parent="."]
-margin_left = 802.341
-margin_top = 524.659
-margin_right = 1017.34
-margin_bottom = 589.659
+[node name="UI" type="Node2D" parent="."]
+
+[node name="Searchbar" type="LineEdit" parent="UI"]
+margin_top = 1.0
+margin_right = 213.0
+margin_bottom = 25.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DistSlider" type="HSlider" parent="UI"]
+margin_left = 0.731506
+margin_top = 43.5655
+margin_right = 215.731
+margin_bottom = 108.565
 min_value = 10.0
 value = 10.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="DistVal" type="Label" parent="."]
-margin_left = 804.0
-margin_top = 520.0
-margin_right = 1014.0
-margin_bottom = 534.0
+[node name="DistVal" type="Label" parent="UI"]
+margin_left = 2.3905
+margin_top = 38.9065
+margin_right = 212.391
+margin_bottom = 52.9065
 text = "0"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Dist" type="Label" parent="."]
-margin_left = 740.815
-margin_top = 549.555
-margin_right = 796.815
-margin_bottom = 563.555
+[node name="Dist" type="Label" parent="UI"]
+margin_left = -60.7945
+margin_top = 68.4615
+margin_right = -4.79449
+margin_bottom = 82.4615
 text = "Distance"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="value_changed" from="DistSlider" to="." method="_on_DistSlider_value_changed"]
+
+[node name="Dist2" type="Label" parent="UI"]
+margin_left = -60.7945
+margin_top = 6.46149
+margin_right = -4.79449
+margin_bottom = 20.4615
+text = "Search"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="value_changed" from="UI/DistSlider" to="." method="_on_DistSlider_value_changed"]
