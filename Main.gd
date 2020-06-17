@@ -99,7 +99,7 @@ func _ready():
 		var edge = EdgeScene.instance()
 		var source_node = nodes[edge_node.source]
 		var target_node = nodes[edge_node.target]
-		edge.initialize(source_node, target_node, 3.0)
+		edge.initialize(source_node, target_node, edge_node.value)
 		add_child(edge)
 		
 		$DistSlider.value = desired_distance

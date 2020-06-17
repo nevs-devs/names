@@ -22,4 +22,4 @@ func _physics_process(delta: float) -> void:
 		_nodeA.translate(dir * (diff / 2.0) * snappiness * delta)
 		_nodeB.translate(-dir * (diff / 2.0) * snappiness * delta)
 	
-	$MeshInstance.scale = Vector3(1, dist, 1)
+	$MeshInstance.scale = Vector3(_val, dist, _val)
