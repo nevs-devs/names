@@ -69,4 +69,6 @@ text = "Search"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
 [connection signal="value_changed" from="UI/DistSlider" to="." method="_on_DistSlider_value_changed"]

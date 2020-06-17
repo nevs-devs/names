@@ -37,9 +37,14 @@ class EdgeNode:
 var name_nodes: Array = []
 var edge_nodes: Array = []
 
-func read_xml():
+func _on_request_completed(result, response_code, headers, body):
+	print(body)
+	read_xml(body)
+	read_nodes()
+
+func read_xml(body):
 	var data = XMLParser.new()
-	data.open('dataset.xml')
+	data.open_buffer(body)
 	
 	var current_name_node = null
 	var current_edge_node = null
@@ -77,8 +82,10 @@ func read_xml():
 		target_node.num_edges += 1
 
 func _ready():
-	read_xml()
+	$HTTPRequest.connect("request_completed", self, "_on_request_completed")
+	$HTTPRequest.request("https://raw.githubusercontent.com/nevs-devs/names/master/dataset.xml")
 
+func read_nodes():
 	var index = 0
 	for name_node in name_nodes:
 		if index >= NUM_NODES:
