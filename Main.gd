@@ -1,5 +1,6 @@
 extends Spatial
 
+const NUM_NODES = 20
 const GraphNodeScene = preload("res://GraphNode.tscn")
 const EdgeScene = preload("res://Edge.tscn")
 const INIT_DISTANCE = 10.0
@@ -68,11 +69,11 @@ func _ready():
 	read_xml()
 	var nodes: Array = []
 
-
 	var index = 0
 	for name_node in name_nodes:
-		if index > 1:
+		if index >= NUM_NODES:
 			break
+		assert(name_node.id == index)
 		var graph_node = GraphNodeScene.instance()
 		nodes.append(graph_node)
 		graph_node.change_text(name_node.name)
@@ -82,11 +83,12 @@ func _ready():
 		
 		index += 1
 
-	var edge = EdgeScene.instance()
-	edge.initialize(nodes[0], nodes[1], 3.0)
-	add_child(edge)
-	print(nodes[0]._name)
-	print(nodes[1]._name)
+	for edge_node in edge_nodes:
+		if edge_node.source >= NUM_NODES or edge_node.target >= NUM_NODES:
+			continue
+		var edge = EdgeScene.instance()
+		edge.initialize(nodes[edge_node.source], nodes[edge_node.target], 3.0)
+		add_child(edge)
 
 
 func _on_node_selected(node):
