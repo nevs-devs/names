@@ -17,10 +17,10 @@ func _physics_process(delta: float) -> void:
 	look_at(_nodeA.translation, Vector3.UP)
 	var dist = _nodeA.translation.distance_to(_nodeB.translation)
 	
-	var diff: float = abs(dist - desired_distance)
-	#if abs(diff) > 0.1:
-	var dir = _nodeA.translation.direction_to(_nodeB.translation)
-	_nodeA.translate(dir * (diff / 2.0) * 0.2 * delta)
-	_nodeB.translate(-dir * (diff / 2.0) * 0.2 * delta)
+	var diff: float = dist - desired_distance
+	if abs(diff) > 0.1:
+		var dir = _nodeA.translation.direction_to(_nodeB.translation)
+		_nodeA.translate(dir * (diff / 2.0) * 0.2 * delta)
+		_nodeB.translate(-dir * (diff / 2.0) * 0.2 * delta)
 	
 	scale = Vector3(1, 1, dist)
