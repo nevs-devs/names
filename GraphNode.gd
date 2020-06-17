@@ -11,7 +11,7 @@ func _ready():
 	$Quad/Area.connect("input_event", self, "_on_input_event")
 
 func _on_input_event(_camera, event, click_position, _click_normal, _shape_idx):
-	if event is InputEventMouseButton and event.button_index and event.pressed:
+	if event is InputEventMouseButton and event.button_index == 1 and event.pressed:
 		emit_signal("user_selected", self)
 
 func change_text(text: String) -> void:
