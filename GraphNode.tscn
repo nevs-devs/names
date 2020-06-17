@@ -3,14 +3,14 @@
 [ext_resource path="res://Open_Sans/OpenSans-SemiBold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://GraphNode.gd" type="Script" id=2]
 
-[sub_resource type="DynamicFont" id=8]
-size = 20
+[sub_resource type="DynamicFont" id=1]
+size = 22
 font_data = ExtResource( 1 )
 
-[sub_resource type="QuadMesh" id=5]
-size = Vector2( 1, 0.5 )
+[sub_resource type="CubeMesh" id=6]
+size = Vector3( 2, 1, 0.2 )
 
-[sub_resource type="ViewportTexture" id=6]
+[sub_resource type="ViewportTexture" id=9]
 viewport_path = NodePath("Viewport")
 
 [sub_resource type="SpatialMaterial" id=7]
@@ -18,10 +18,12 @@ resource_local_to_scene = true
 flags_transparent = true
 flags_unshaded = true
 flags_albedo_tex_force_srgb = true
-albedo_texture = SubResource( 6 )
+albedo_texture = SubResource( 9 )
+uv1_scale = Vector3( 3, 2, 1 )
+uv1_offset = Vector3( 0, 0.02, 0 )
 
-[sub_resource type="BoxShape" id=4]
-extents = Vector3( 1.5, 1, 0.05 )
+[sub_resource type="BoxShape" id=8]
+extents = Vector3( 1.02303, 0.514622, 0.05 )
 
 [node name="GraphNode" type="Spatial"]
 script = ExtResource( 2 )
@@ -45,13 +47,14 @@ anchor_bottom = 1.0
 [node name="Label" type="Label" parent="Viewport/GUI/Panel"]
 margin_right = 150.0
 margin_bottom = 75.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 1 )
 text = "Hello world!"
 align = 1
 valign = 1
 
 [node name="Quad" type="MeshInstance" parent="."]
-mesh = SubResource( 5 )
+transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0, 0 )
+mesh = SubResource( 6 )
 material/0 = SubResource( 7 )
 
 [node name="Area" type="Area" parent="Quad"]
@@ -59,4 +62,4 @@ input_capture_on_drag = true
 collision_layer = 2
 
 [node name="CollisionShape" type="CollisionShape" parent="Quad/Area"]
-shape = SubResource( 4 )
+shape = SubResource( 8 )

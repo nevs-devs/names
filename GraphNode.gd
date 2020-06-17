@@ -5,3 +5,6 @@ func _ready():
 
 func change_text(text: String) -> void:
 	$Viewport/GUI/Panel/Label.text = text
+	
+func _process(delta: float) -> void:
+	look_at($"/root/Main/Camera".translation, Vector3.UP)
