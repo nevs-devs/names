@@ -19,10 +19,6 @@ config/name="Names"
 run/main_scene="res://Main.tscn"
 config/icon="res://icon.png"
 
-[display]
-
-window/size/fullscreen=true
-
 [network]
 
 limits/debugger_stdout/max_chars_per_second=65536
