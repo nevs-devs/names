@@ -8,7 +8,7 @@ var snappiness: float = 4.0
 func initialize(nodeA: Spatial, nodeB: Spatial, val: float) -> void:
 	_nodeA = nodeA
 	_nodeB = nodeB
-	_val = val
+	_val = val*0.3
 	
 func _physics_process(delta: float) -> void:
 	var center: Vector3 = (_nodeA.translation + _nodeB.translation) / 2
@@ -22,4 +22,4 @@ func _physics_process(delta: float) -> void:
 		_nodeA.translate(dir * (diff / 2.0) * snappiness * delta)
 		_nodeB.translate(-dir * (diff / 2.0) * snappiness * delta)
 	
-	$MeshInstance.scale = Vector3(_val, dist, _val)
+	$MeshInstance.scale = Vector3(_val, dist*0.95, _val)
