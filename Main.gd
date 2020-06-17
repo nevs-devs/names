@@ -72,9 +72,10 @@ func _ready():
 		var graph_node = GraphNodeScene.instance()
 		graph_node.change_text(name_node.name)
 		graph_node.translate(Vector3((randf()-0.5)*INIT_DISTANCE, (randf()-0.5)*INIT_DISTANCE, (randf()-0.5)*INIT_DISTANCE))
+		graph_node.connect("user_selected", self, "_on_node_selected")
 		add_child(graph_node)
 		
 		index += 1
 
-	# print(name_nodes)
-	# print(edge_nodes)
+func _on_node_selected(node):
+	print(node)
