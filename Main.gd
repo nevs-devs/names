@@ -3,6 +3,7 @@ extends Spatial
 const GraphNodeScene = preload("res://GraphNode.tscn")
 const EdgeScene = preload("res://Edge.tscn")
 const INIT_DISTANCE = 10.0
+var selected_node = null
 
 class NameNode:
 	var id
@@ -89,4 +90,12 @@ func _ready():
 
 
 func _on_node_selected(node):
-	print(node)
+	selected_node = node
+
+func _input(event):
+	if event is InputEventMouseButton and event.button_index == 1 and event.pressed == false:
+		selected_node = null
+	elif event is InputEventMouseMotion and selected_node != null:
+		var distance = selected_node.translation.distance_to($Camera.translation)
+		var target_point = $Camera.project_ray_origin(event.position) + $Camera.project_ray_normal(event.position) * distance
+		selected_node.translation = target_point
