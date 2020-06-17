@@ -1,6 +1,6 @@
 extends Spatial
 
-const NUM_NODES = 10000
+const NUM_NODES = 50
 const GraphNodeScene = preload("res://GraphNode.tscn")
 const EdgeScene = preload("res://Edge.tscn")
 const INIT_DISTANCE = 10.0
@@ -9,9 +9,11 @@ var selected_node = null
 class NameNode:
 	var id
 	var name
+	var num_edges
 	
 	func _init(id):
 		self.id = id
+		self.num_edges = 0
 
 	func _to_string():
 		return self.name + ' (' + str(self.id) + ')'
@@ -65,6 +67,11 @@ func read_xml():
 					current_edge_node.value = float(name)
 					edge_nodes.append(current_edge_node)
 					current_edge_node = null
+	for edge_node in edge_nodes:
+		var source_node = name_nodes[edge_node.source]
+		var target_node = name_nodes[edge_node.target]
+		source_node.num_edges += 1
+		target_node.num_edges += 1
 
 func _ready():
 	read_xml()
@@ -78,6 +85,7 @@ func _ready():
 		var graph_node = GraphNodeScene.instance()
 		nodes.append(graph_node)
 		graph_node.change_text(name_node.name)
+		graph_node._num_edges = name_node.num_edges
 		graph_node.translate(Vector3((randf()-0.5)*INIT_DISTANCE, (randf()-0.5)*INIT_DISTANCE, (randf()-0.5)*INIT_DISTANCE))
 		graph_node.connect("user_selected", self, "_on_node_selected")
 		add_child(graph_node)
@@ -88,7 +96,9 @@ func _ready():
 		if edge_node.source >= NUM_NODES or edge_node.target >= NUM_NODES:
 			continue
 		var edge = EdgeScene.instance()
-		edge.initialize(nodes[edge_node.source], nodes[edge_node.target], 3.0)
+		var source_node = nodes[edge_node.source]
+		var target_node = nodes[edge_node.target]
+		edge.initialize(source_node, target_node, 3.0)
 		add_child(edge)
 
 
