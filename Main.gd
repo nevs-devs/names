@@ -5,6 +5,7 @@ const GraphNodeScene = preload("res://GraphNode.tscn")
 const EdgeScene = preload("res://Edge.tscn")
 const INIT_DISTANCE = 10.0
 var selected_node = null
+var desired_distance: float = 20.0
 
 class NameNode:
 	var id
@@ -100,6 +101,8 @@ func _ready():
 		var target_node = nodes[edge_node.target]
 		edge.initialize(source_node, target_node, 3.0)
 		add_child(edge)
+		
+		$DistSlider.value = desired_distance
 
 
 func _on_node_selected(node):
@@ -115,3 +118,8 @@ func _process(_delta):
 		var distance = selected_node.translation.distance_to($Camera.translation)
 		var target_point = $Camera.project_ray_origin(mouse_position) + $Camera.project_ray_normal(mouse_position) * distance
 		selected_node.translation = target_point
+
+
+func _on_DistSlider_value_changed(value):
+	desired_distance = value
+	$DistVal.text = str(value)

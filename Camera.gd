@@ -6,7 +6,7 @@ var _viewport_size: Vector2
 
 export (float, 0.0, 1.0) var sensitivity = 0.5
 export (float, 0.0, 0.999, 0.001) var smoothness = 0.5
-export (float, 1.0, 10.0, 0.1) var distance = 2.0
+var distance = 30.0
 
 var _mouse_offset: Vector2
 var _yaw: float = 0.0
@@ -22,9 +22,9 @@ func _input(event):
 		if event.button_index == BUTTON_RIGHT:
 			_dragging = event.is_pressed()
 		if event.button_index == BUTTON_WHEEL_UP:
-			distance = max(distance - 0.1, 0.5)
+			distance = max(distance - 0.2, 10.0)
 		if event.button_index == BUTTON_WHEEL_DOWN:
-			distance = min(distance + 0.1, 10.0)
+			distance = min(distance + 0.2, 100.0)
 	
 	if event is InputEventMouseMotion and _dragging:
 			_mouse_offset = event.relative
