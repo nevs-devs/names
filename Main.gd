@@ -1,5 +1,7 @@
 extends Spatial
 
+const GraphNodeScene = preload("res://GraphNode.tscn")
+
 class NameNode:
 	var id
 	var name
@@ -22,10 +24,10 @@ class EdgeNode:
 	func _to_string():
 		return 'Edge (' + str(self.source) + ' -> ' + str(self.target) + ')'
 
-var name_nodes = []
-var edge_nodes = []
+var name_nodes: Array = []
+var edge_nodes: Array = []
 
-func _ready():
+func read_xml():
 	var data = XMLParser.new()
 	data.open('dataset.xml')
 	
@@ -59,5 +61,19 @@ func _ready():
 					edge_nodes.append(current_edge_node)
 					current_edge_node = null
 
-	print(name_nodes)
-	print(edge_nodes)
+func _ready():
+	read_xml()
+
+	var index = 0
+	for name_node in name_nodes:
+		if index > 20:
+			break
+		var graph_node = GraphNodeScene.instance()
+		graph_node.change_text(name_node.name)
+		graph_node.translate(Vector3((randf()-0.5)*3.0, (randf()-0.5)*3.0, (randf()-0.5)*3.0))
+		add_child(graph_node)
+		
+		index += 1
+
+	# print(name_nodes)
+	# print(edge_nodes)
