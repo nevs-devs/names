@@ -22,6 +22,7 @@ class EdgeNode:
 	var value
 
 	func _init(source_arg, target_arg):
+		randomize()
 		self.source = source_arg
 		self.target = target_arg
 

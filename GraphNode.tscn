@@ -52,14 +52,13 @@ text = "Hello world!"
 align = 1
 valign = 1
 
-[node name="Quad" type="MeshInstance" parent="."]
-transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0, 0 )
+[node name="Cube" type="MeshInstance" parent="."]
 mesh = SubResource( 2 )
 material/0 = SubResource( 4 )
 
-[node name="Area" type="Area" parent="Quad"]
+[node name="Area" type="Area" parent="Cube"]
 input_capture_on_drag = true
 collision_layer = 2
 
-[node name="CollisionShape" type="CollisionShape" parent="Quad/Area"]
+[node name="CollisionShape" type="CollisionShape" parent="Cube/Area"]
 shape = SubResource( 5 )
