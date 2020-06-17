@@ -1,18 +1,18 @@
 extends Spatial
 
+signal user_selected(node)
+
 var velocity = Vector3()
 var _name = ""
+var _user_selected
+var _camera_to_self = null
 
 func _ready():
-	$Quad/Area.connect("mouse_entered", self, "_on_mouse_entered")
 	$Quad/Area.connect("input_event", self, "_on_input_event")
 
-func _on_mouse_entered():
-	print(_name)
-
-func _on_input_event(camera, event, click_position, _click_normal, _shape_idx):
-	if event is InputEventMouseButton and event.button_index:
-		print(event.button_index)
+func _on_input_event(_camera, event, click_position, _click_normal, _shape_idx):
+	if event is InputEventMouseButton and event.button_index and event.pressed:
+		emit_signal("user_selected", self)
 
 func change_text(text: String) -> void:
 	$Viewport/GUI/Panel/Label.text = text

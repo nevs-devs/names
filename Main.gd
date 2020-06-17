@@ -3,6 +3,7 @@ extends Spatial
 const GraphNodeScene = preload("res://GraphNode.tscn")
 const EdgeScene = preload("res://Edge.tscn")
 const INIT_DISTANCE = 10.0
+var selected_node = null
 
 class NameNode:
 	var id
@@ -76,6 +77,7 @@ func _ready():
 		nodes.append(graph_node)
 		graph_node.change_text(name_node.name)
 		graph_node.translate(Vector3((randf()-0.5)*INIT_DISTANCE, (randf()-0.5)*INIT_DISTANCE, (randf()-0.5)*INIT_DISTANCE))
+		graph_node.connect("user_selected", self, "_on_node_selected")
 		add_child(graph_node)
 		
 		index += 1
@@ -85,3 +87,15 @@ func _ready():
 	add_child(edge)
 	print(nodes[0]._name)
 	print(nodes[1]._name)
+
+
+func _on_node_selected(node):
+	selected_node = node
+
+func _input(event):
+	if event is InputEventMouseButton and event.button_index == 1 and event.pressed == false:
+		selected_node = null
+	elif event is InputEventMouseMotion and selected_node != null:
+		var distance = selected_node.translation.distance_to($Camera.translation)
+		var target_point = $Camera.project_ray_origin(event.position) + $Camera.project_ray_normal(event.position) * distance
+		selected_node.translation = target_point
