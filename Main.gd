@@ -70,7 +70,7 @@ func _ready():
 
 	var index = 0
 	for name_node in name_nodes:
-		if index > 20:
+		if index > 1:
 			break
 		var graph_node = GraphNodeScene.instance()
 		nodes.append(graph_node)
@@ -82,4 +82,6 @@ func _ready():
 
 	var edge = EdgeScene.instance()
 	edge.initialize(nodes[0], nodes[1], 3.0)
-	# print(edge_nodes)
+	add_child(edge)
+	print(nodes[0]._name)
+	print(nodes[1]._name)

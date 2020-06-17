@@ -10,5 +10,9 @@ func initialize(nodeA: Spatial, nodeB: Spatial, val: float) -> void:
 	_val = val
 	
 func _process(delta: float) -> void:
+	var center: Vector3 = (_nodeA.translation + _nodeB.translation) / 2
+	translation = center
+	look_at(_nodeA.translation, Vector3.UP)
 	var dist = _nodeA.translation.distance_to(_nodeB.translation)
-	print(dist)
+	scale = Vector3(1, 1, dist)
+	#print(dist)
