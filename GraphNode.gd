@@ -17,8 +17,11 @@ func _on_input_event(_camera, event, click_position, _click_normal, _shape_idx):
 		emit_signal("user_selected", self)
 
 func change_text(text: String) -> void:
-	$Viewport/GUI/Panel/Label.text = text
+	$Viewport/GUI/Label.text = text
 	_name = text
+
+func set_color(color):
+	$Cube.get_surface_material(0).albedo_color = color
 
 func _process(delta: float) -> void:
 	var cam_pos = $"/root/Main/Camera".translation

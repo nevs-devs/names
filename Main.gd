@@ -7,6 +7,7 @@ const INIT_DISTANCE = 10.0
 var selected_node = null
 var desired_distance: float = 20.0
 var screen_size: Vector2
+var nodes: Array = []
 
 class NameNode:
 	var id
@@ -77,7 +78,7 @@ func read_xml():
 
 func _ready():
 	read_xml()
-	var nodes: Array = []
+
 	var index = 0
 	for name_node in name_nodes:
 		if index >= NUM_NODES:
@@ -104,6 +105,12 @@ func _ready():
 		
 		$UI/DistSlider.value = desired_distance
 
+	$UI/Searchbar.connect("text_changed", self, '_on_search')
+
+
+func _on_search(value):
+	search_name(value)
+
 
 func _on_node_selected(node):
 	selected_node = node
@@ -124,7 +131,16 @@ func _process(_delta):
 		$UI.position.x = screen_size.x - 250
 		$UI.position.y = screen_size.y - 100
 
-
 func _on_DistSlider_value_changed(value):
 	desired_distance = value
 	$UI/DistVal.text = str(value)
+
+func search_name(name):
+	for node in nodes:
+		var matches = node._name.to_lower().begins_with(name.to_lower())
+		if name == '':
+			matches = false
+		if matches:
+			node.set_color(Color.red)
+		else:
+			node.set_color(Color.white)
