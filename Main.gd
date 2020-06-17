@@ -101,9 +101,12 @@ func _on_node_selected(node):
 func _input(event):
 	if event is InputEventMouseButton and event.button_index == 1 and event.pressed == false:
 		selected_node = null
-	elif event is InputEventMouseMotion and selected_node != null:
+
+func _process(_delta):
+	if selected_node != null:
+		var mouse_position = get_viewport().get_mouse_position()
 		var distance = selected_node.translation.distance_to($Camera.translation)
-		var target_point = $Camera.project_ray_origin(event.position) + $Camera.project_ray_normal(event.position) * distance
+		var target_point = $Camera.project_ray_origin(mouse_position) + $Camera.project_ray_normal(mouse_position) * distance
 		selected_node.translation = target_point
 
 
