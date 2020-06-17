@@ -1,6 +1,7 @@
 extends Spatial
 
 const GraphNodeScene = preload("res://GraphNode.tscn")
+const INIT_DISTANCE = 10.0
 
 class NameNode:
 	var id
@@ -70,7 +71,7 @@ func _ready():
 			break
 		var graph_node = GraphNodeScene.instance()
 		graph_node.change_text(name_node.name)
-		graph_node.translate(Vector3((randf()-0.5)*3.0, (randf()-0.5)*3.0, (randf()-0.5)*3.0))
+		graph_node.translate(Vector3((randf()-0.5)*INIT_DISTANCE, (randf()-0.5)*INIT_DISTANCE, (randf()-0.5)*INIT_DISTANCE))
 		add_child(graph_node)
 		
 		index += 1
