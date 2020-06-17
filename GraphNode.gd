@@ -7,4 +7,6 @@ func change_text(text: String) -> void:
 	$Viewport/GUI/Panel/Label.text = text
 	
 func _process(delta: float) -> void:
-	look_at($"/root/Main/Camera".translation, Vector3.UP)
+	var cam_pos = $"/root/Main/Camera".translation
+	cam_pos.y = translation.y
+	look_at(cam_pos, Vector3.UP)
