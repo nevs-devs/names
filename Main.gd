@@ -39,7 +39,7 @@ var edge_nodes: Array = []
 
 func read_xml():
 	var data = XMLParser.new()
-	data.open('dataset.xml')
+	data.open('res://dataset.txt')
 	
 	var current_name_node = null
 	var current_edge_node = null
